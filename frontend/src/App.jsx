@@ -39,6 +39,9 @@ function createConversationId() {
 
 const APP_TIME_ZONE = "Asia/Kolkata";
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
+
 const currentTime = () =>
   new Date().toLocaleTimeString("en-IN", {
     timeZone: APP_TIME_ZONE,
@@ -195,7 +198,7 @@ export default function App() {
 
   const checkBackend = useCallback(async () => {
     try {
-      const response = await fetch("/health");
+      const response = await fetch(`${API_BASE_URL}/health`);;
       setBackendOnline(response.ok);
       return response.ok;
     } catch {
@@ -211,7 +214,7 @@ export default function App() {
     setBalanceLoading(true);
 
     try {
-      const response = await fetch("/balance");
+      const response = await fetch(`${API_BASE_URL}/balance`);
       const data = await response.json().catch(() => ({}));
       console.log("Balance API response:", response.status, data);
 
@@ -252,7 +255,7 @@ export default function App() {
       setHistoryError("");
 
       try {
-        const response = await fetch("/payments");
+        const response = await fetch(`${API_BASE_URL}/payments`);
         const data = await response.json().catch(() => ({}));
 
         if (!response.ok) {
@@ -388,7 +391,7 @@ export default function App() {
     formData.append("file", blob, filename);
 
     try {
-      const response = await fetch("/voice", {
+      const response = await fetch(`${API_BASE_URL}/voice`, {
         method: "POST",
         body: formData,
       });
@@ -635,8 +638,8 @@ export default function App() {
 
     try {
       const response = await fetch(
-        `/payments/${encodeURIComponent(payment.payment_id)}/confirm`,
-        {
+  `${API_BASE_URL}/payments/${encodeURIComponent(payment.payment_id)}/confirm`,
+  {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ confirmed }),
