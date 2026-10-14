@@ -198,7 +198,7 @@ export default function App() {
 
   const checkBackend = useCallback(async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/health`);;
+      const response = await fetch(`${API_BASE_URL}/health`);
       setBackendOnline(response.ok);
       return response.ok;
     } catch {
@@ -638,8 +638,8 @@ export default function App() {
 
     try {
       const response = await fetch(
-  `${API_BASE_URL}/payments/${encodeURIComponent(payment.payment_id)}/confirm`,
-  {
+          `${API_BASE_URL}/payments/${encodeURIComponent(payment.payment_id)}/confirm`,
+          {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ confirmed }),
