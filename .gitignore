@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# SQLite databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Frontend
+node_modules/
+dist/
+
+# macOS
+.DS_Store
+# SQLite backups
+*.db.backup
+*.sqlite.backup
+
+# Local voice test recordings
+backend/test_audio*.m4a
