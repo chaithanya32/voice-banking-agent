@@ -6,7 +6,7 @@ from typing import Optional
 from uuid import UUID
 from zoneinfo import ZoneInfo
 from dataclasses import dataclass
-
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from pydantic import BaseModel, Field
 from sqlalchemy import desc, func
@@ -49,6 +49,16 @@ app = FastAPI(
     title="Voice Banking Agent",
     description="A safety-first mock voice banking application",
     version="1.0.0",
+)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://voxbank-89tingj4a-chaithanyas-projects-4a76b4bf.vercel.app",
+        "http://localhost:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
